@@ -1,77 +1,81 @@
-openapi: 3.0.3 # version of the specification 
-info: 
-  version: '1' 
+openapi: 3.0.3
+info:
+  version: "1"
   title: Pessoa Service
- 
-servers: 
+servers:
   - url: http://localhost:8888
- 
-paths: 
-  /pessoas: 
-    get: 
+paths:
+  /pessoas:
+    get:
       summary: Retorna uma lista de pessoas
-      operationId: buscarPessoas 
-      responses: 
-        200: 
-          description: 'OK'
+      operationId: buscarPessoas
+      tags:
+        - Pessoas
+      responses:
+        "200":
+          description: OK
           content:
             application/json:
-              schema: 
+              schema:
                 type: array
-                items: 
-                  schema:
-                    type: object 
-                  properties: 
-                  id:
-                    type: integer
-                  name:
-                    type: string
-                  $ref: '#/components/schemas/PessoaResponse' 
-             
-  /pessoas/{id}: 
-    parameters: 
-      - in: path 
-        name: id 
-        schema: 
-          type: integer 
-          format: int64
-        required: true 
-        description: "Id da pessoa" 
-        example: 1 
-    get: 
+                items:
+                  $ref: "#/components/schemas/PessoaResponse"
+    post:
+      operationId: criaPessoas
+      summary: Cria nova pessoa
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PessoaRequest"
+      tags:
+        - Pessoas
+      responses:
+        "201":
+          description: Pessoa Criada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PessoaResponse"
+  "/pessoas/{id}":
+    get:
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int64
+          required: true
+          description: Id da pessoa
+          example: 1
       summary: Busca pessoa pelo id
-      operationId: buscarPessoaPeloId 
-      responses: 
-        200: 
-          description: 'OK'
-          content: 
-            application/json: 
-              schema: 
-                $ref: '#/components/schemas/PessoaResponse' 
-components: 
-  schemas: 
-    PessoaRequest: 
-      type: object 
-      properties: 
-        id: 
-          type: integer 
-          format: int64  
-        name: 
-          type: string 
-      example:  
-        id: 1
-        name: Jessica Right
-    PessoaResponse: 
-      type: object 
-      properties: 
-        id: 
-          type: integer 
-          format: int64  
-        name: 
-          type: string 
-      example:  
-        id: 1
-        name: Jessica Right  
-          
-          
-          
+      operationId: buscarPessoaPeloId
+      tags:
+        - Pessoas
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PessoaResponse"
+components:
+  schemas:
+    PessoaRequest:
+      description: Objeto de requisicao
+      type: object
+      properties:
+        name:
+          type: string
+          example: Jessica Right
+    PessoaResponse:
+      description: Objeto de resposta
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: Jessica Right Rust
