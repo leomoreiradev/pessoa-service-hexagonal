@@ -9,6 +9,7 @@ Techs:
 <p>h2-database</p>
 <p>mapstruct</p>
 
+Swagger: http://localhost:8888/swagger-ui/index.html#/
 
 
 
