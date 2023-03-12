@@ -2,6 +2,7 @@ package com.leomoreiradev.pessoaservicehexagonal.interactors;
 
 import com.leomoreiradev.pessoaservicehexagonal.datasources.port.PesssoaRepositoryPort;
 import com.leomoreiradev.pessoaservicehexagonal.entities.Pessoa;
+import com.leomoreiradev.pessoaservicehexagonal.transportlayers.openapi.model.PessoaRequest;
 import com.leomoreiradev.pessoaservicehexagonal.transportlayers.port.PessoaServicePort;
 
 import java.util.List;
@@ -27,5 +28,10 @@ public class PessoaUseCase implements PessoaServicePort {
         } catch (Exception e) {
             throw new RuntimeException("Pessoa não encontrada");
         }
+    }
+
+    @Override
+    public Pessoa criarPessoa(PessoaRequest pessoaRequest) {
+        return pesssoaRepositoryPort.criarPessoa(pessoaRequest);
     }
 }

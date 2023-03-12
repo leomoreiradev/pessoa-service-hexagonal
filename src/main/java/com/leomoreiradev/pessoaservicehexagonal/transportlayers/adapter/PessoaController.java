@@ -1,13 +1,17 @@
 package com.leomoreiradev.pessoaservicehexagonal.transportlayers.adapter;
 
+import com.leomoreiradev.pessoaservicehexagonal.entities.Pessoa;
 import com.leomoreiradev.pessoaservicehexagonal.transportlayers.PessoaMapper;
+import com.leomoreiradev.pessoaservicehexagonal.transportlayers.openapi.model.PessoaRequest;
 import com.leomoreiradev.pessoaservicehexagonal.transportlayers.port.PessoaServicePort;
 import com.leomoreiradev.pessoaservicehexagonal.transportlayers.openapi.api.PessoasApi;
 import com.leomoreiradev.pessoaservicehexagonal.transportlayers.openapi.model.PessoaResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.lang.annotation.Inherited;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,4 +42,11 @@ public class PessoaController implements PessoasApi {
     public ResponseEntity<PessoaResponse> buscarPessoaPeloId(Long id) {
         return ResponseEntity.ok(pessoaMapper.pessoaToPessoaResponse(pessoaServicePort.buscarPessoaPeloId(id)));
     }
+
+
+    @Override
+    public ResponseEntity<PessoaResponse> criarPessoa(PessoaRequest pessoaRequest) {
+        return ResponseEntity.ok(pessoaMapper.pessoaToPessoaResponse(pessoaServicePort.criarPessoa(pessoaRequest)));
+    }
+
 }

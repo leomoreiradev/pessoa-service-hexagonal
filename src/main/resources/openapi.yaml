@@ -21,7 +21,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/PessoaResponse"
     post:
-      operationId: criaPessoas
+      operationId: criarPessoa
       summary: Cria nova pessoa
       requestBody:
         content:
